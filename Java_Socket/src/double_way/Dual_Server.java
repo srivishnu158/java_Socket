@@ -15,7 +15,7 @@ import java.io.*;
 		while(true) {
 			try {
 				String inbox = br2.readLine();
-				System.out.println("Client: "+inbox);
+				System.out.println("\t\tClient: "+inbox);
 			}
 			catch(Exception e) {
 				System.exit(1);

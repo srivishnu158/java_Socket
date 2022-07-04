@@ -16,7 +16,7 @@ class Sensing2 extends Thread{
 		while(true) {
 			try {
 				inbox = br2.readLine();
-				System.out.println("Server: "+inbox);
+				System.out.println("\t\tServer: "+inbox);
 			}
 			catch(Exception e){
 				System.exit(1);
@@ -35,12 +35,12 @@ public class Dual_Client {
 		//PrintStream p = new PrintStream(sock.getOutputStream());
 		
 		String inbox="",sent="";
+		Sensing2 th = new Sensing2(br2);
+		th.start();
 		while(!inbox.equals("stop")) {	
 			sent = br.readLine();
 			dout.writeBytes(sent + "\n");
 			
-			Sensing2 th = new Sensing2(br2);
-			th.start();
 //			inbox = br2.readLine();
 //			System.out.println("Server: "+inbox);
 		}
