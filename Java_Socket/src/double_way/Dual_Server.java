@@ -5,7 +5,24 @@ import java.net.Socket;
 import java.io.*;
 //import java.io.InputStreamReader;
 
-
+ class Sensing1 extends Thread{
+	 BufferedReader br2;
+	 String inbox;
+	public Sensing1(BufferedReader br2) {
+		this.br2 = br2;
+	}
+	public void run() {
+		while(true) {
+			try {
+				String inbox = br2.readLine();
+				System.out.println("Client: "+inbox);
+			}
+			catch(Exception e) {
+				System.exit(1);
+			}
+		}
+	}
+}
 
 public class Dual_Server {
 
@@ -20,10 +37,14 @@ public class Dual_Server {
 		BufferedReader br2 = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 		PrintStream p = new PrintStream(sock.getOutputStream());
 		
+		
 		String inbox="",sent="";
 		while(!inbox.equals("stop")) {
-			inbox = br2.readLine();
-			System.out.println("Client: "+inbox);
+//			inbox = br2.readLine();
+//			System.out.println("Client: "+inbox);
+			Sensing1 th = new Sensing1(br2);
+			th.start();
+			
 			sent = br.readLine();
 			p.println(sent);
 		}

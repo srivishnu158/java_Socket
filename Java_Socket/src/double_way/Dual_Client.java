@@ -4,6 +4,26 @@ import java.io.*;
 import java.net.Socket;
 
 
+class Sensing2 extends Thread{
+	String inbox;
+	BufferedReader br2;
+	
+	 public Sensing2(BufferedReader br2){
+		this.br2 = br2;
+	}
+	 
+	public void run(){
+		while(true) {
+			try {
+				inbox = br2.readLine();
+				System.out.println("Server: "+inbox);
+			}
+			catch(Exception e){
+				System.exit(1);
+			}
+		}
+	}
+}
 public class Dual_Client {
 	public static void main(String[] args) throws Exception {
 		Socket sock = new Socket("localhost",9998);
@@ -18,8 +38,11 @@ public class Dual_Client {
 		while(!inbox.equals("stop")) {	
 			sent = br.readLine();
 			dout.writeBytes(sent + "\n");
-			inbox = br2.readLine();
-			System.out.println("Server: "+inbox);
+			
+			Sensing2 th = new Sensing2(br2);
+			th.start();
+//			inbox = br2.readLine();
+//			System.out.println("Server: "+inbox);
 		}
 		// din.close();
 		
