@@ -38,15 +38,15 @@ public class Dual_Server {
 		PrintStream p = new PrintStream(sock.getOutputStream());
 		
 		
-		String inbox="",sent="";
+		String inbox="",send="";
+		Sensing1 th = new Sensing1(br2);
+		th.start();
 		while(!inbox.equals("stop")) {
 //			inbox = br2.readLine();
 //			System.out.println("Client: "+inbox);
-			Sensing1 th = new Sensing1(br2);
-			th.start();
 			
-			sent = br.readLine();
-			p.println(sent);
+			send = br.readLine();
+			p.println(send);
 		}
 		//din.close();
 		sock.close();
