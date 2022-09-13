@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Server {
 
 	public static void main(String[] args) throws Exception {
-		ServerSocket server_socket = new ServerSocket(9999);
+		ServerSocket server_socket = new ServerSocket(9998);
 		System.out.println("Server has started");
 		Socket sock = server_socket.accept();
 		BufferedReader buff = new BufferedReader(new InputStreamReader(sock.getInputStream()));
